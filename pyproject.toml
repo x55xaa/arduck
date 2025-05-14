@@ -5,8 +5,8 @@ requires = ["setuptools>=61.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tool"
-description = "A barebone Python package template for CLI tools."
+name = "arduck"
+description = "Easy-to-use keystroke injection payload generator for the Arduino."
 readme = "README.md"
 requires-python = ">=3.12"
 license = {file = "LICENSE"}
@@ -35,10 +35,10 @@ docs = ["myst_parser", "sphinx", "sphinx-argparse", "sphinx_autodoc_typehints", 
 testing = ["pylint", "pytest", "pytest-cov", "ruff", "tox"]
 
 [project.urls]
-"Github" = "https://github.com/x55xaa/python-tool"
+"Github" = "https://github.com/x55xaa/arduck"
 
 [project.scripts]
-tool = "tool.__main__:main"
+duck = "arduck.__main__:main"
 
 [tool.pylint.basic]
 include-naming-hint = true

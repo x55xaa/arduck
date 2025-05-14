@@ -1,5 +1,5 @@
 
-# 📦 python-tool
+# 📦 arduck
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 ![Python version: 3.12+](https://img.shields.io/badge/python-3.12+-blue)
@@ -8,39 +8,34 @@
 
 ## Overview
 
-This project is a template for creating Python packages that follows the guidelines contained in [PEP 621](https://peps.python.org/pep-0621).
-It uses a `pyproject.toml` file to store build system requirements and package information.
+This package offers an easy way to generate keystroke injection scripts. It supports a variety of [boards](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/#Compatible%20Hardware) and [keyboard layouts](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/keyboardBegin/#Keyboard%20layouts).
 
+There is no need to get some overpriced usb stick to get the job done (rubberducky _cough cough_); just get an Arduino board that is compatible with the [Keyboard.h](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard) library, and you are good to go!
 
-## Structure
-
-- `.github/worflows` contains GitHub actions used for building, testing, and publishing.
-- `docs` contains the package documentation, generated using Sphinx.
-- `src` contains the source code of the package.
-- `tests` contains pytest unit tests.
 
 ## Installation
 
-Install the package locally with `pip install`:
+Install the package from PyPI by running:
 
 ```bash
-$ pip install .
+$ pip install arduck
 ```
 
 
 ## Usage
 
-This package offers a basic CLI to play around with.
-It can be launched by running:
+This package can be used as a library or through the `duck` console script. More information is present in the docs.
 
-```bash
-$ python -m tool
-```
 
-Or by invoking the `tool` [console script](https://setuptools.pypa.io/en/latest/userguide/entry_point.html#console-scripts).
+## A Word of Caution
+
+Be careful when using and testing arduino scripts that emulate keyboard and mouse presses, because they might make it difficult to program your board.
+And please, always ask for permission from the owner of the machine before plugging in any external devices. Keep in mind that, if abused, this tool has the potential to cause serious harm.
+
+This software is distributed ‘as is’ and without warranties of any kind, either express or implied. Use of the software is at your own risk.
 
 
 ## Documentation
 
-- [Official Documentation](https://x55xaa.github.io/python-tool)
-- [CHANGELOG](https://github.com/x55xaa/python-tool/blob/main/CHANGELOG.md)
+- [Official Documentation](https://x55xaa.github.io/arduck)
+- [CHANGELOG](https://github.com/x55xaa/arduck/blob/main/CHANGELOG.md)
