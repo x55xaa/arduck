@@ -102,7 +102,7 @@ class VerboseArgumentParser(ArgumentParser):
                 'set the verbosity level. option is additive, '
                 'and can be used up to 5 times '
                 '(debug/info/warning/error/critical). '
-                '(default=info)'
+                '(default: info)'
             ),
             required=False,
         )
