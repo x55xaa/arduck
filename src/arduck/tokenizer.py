@@ -26,7 +26,7 @@ from .arduino.keyboard import SPECIAL_KEYS
 type RawKeystroke = str | tuple[str, ...]
 
 
-SPECIAL_CHARACTERS: tuple[str, ...] = ('\t', '\n', '\r', '\f', '\v')
+FORBIDDEN_CHARACTERS: tuple[str, ...] = ('\t', '\n', '\r', '\f', '\v')
 TOKENS: dict[str, str] = {
     'COMBO': r'<([A-Z_]+|[^A-Z])(?:\+([A-Z_]+|[^A-Z]))*>',
     'CHARACTER': r'(.)',
@@ -39,6 +39,12 @@ class Token(NamedTuple):
 
     type: str
     value: str
+
+
+def _is_part_of_uppercase_word(c: str) -> bool:
+    return (
+        not c.islower() and c not in FORBIDDEN_CHARACTERS and len(c) == 1
+    )
 
 
 def to_keystrokes(string: str) -> list[RawKeystroke]:
@@ -73,7 +79,10 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             case 'CHARACTER':
                 result.append(groups[-1])
             case 'COMBO':
-                result.append(tuple(filter(lambda i: i, groups[1:])))
+                if len(combo := tuple(filter(lambda i: i, groups[1:]))) > 1:
+                    result.append(combo)
+                else:
+                    result.extend(combo)
 
     i: int = 0
     while i < len(result):
@@ -84,10 +93,7 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             continue
 
         if key.isupper():
-            word = tuple(takewhile(
-                lambda c: not c.islower() and c not in SPECIAL_CHARACTERS,
-                result[i:],
-            ))
+            word = tuple(takewhile(_is_part_of_uppercase_word, result[i:]))
 
             if len(word) > 1:
                 for j in range(len(word)):
