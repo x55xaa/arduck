@@ -27,6 +27,7 @@ classifiers = [
 ]
 dependencies = [
     "colorama",
+    "jinja2",
 ]
 dynamic = ["version"]
 
