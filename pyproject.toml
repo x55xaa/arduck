@@ -10,7 +10,7 @@ description = "Easy-to-use keystroke injection payload generator for the Arduino
 readme = "README.md"
 requires-python = ">=3.12"
 license = {file = "LICENSE"}
-keywords = ["template"]
+keywords = ["arduino", "keyboard", "keystroke injection", "rubber"]
 authors = [
     { name = "Stefano Cuizza", email = "stefano.cuizza@protonmail.com" },
 ]
