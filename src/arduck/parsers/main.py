@@ -17,14 +17,17 @@
 
 
 from argparse import (
-    ArgumentParser, Namespace,
+    ArgumentParser, FileType, Namespace,
 )
 from collections.abc import Sequence
+import itertools
 import logging
 from typing import Optional, override
 
+from ..arduino.keyboard import LAYOUTS
 from ..modules import metadata
 from ..modules.parsing.parsers import MainArgumentParserTemplate
+from . import types
 
 
 logger = logging.getLogger(__name__)
@@ -54,7 +57,46 @@ class MainArgumentParser(MainArgumentParserTemplate):
         )
 
     def _extend_arguments(self) -> None:
-        pass
+        default_keyboard_layout: str = 'us'
+
+        self.add_argument(
+            'keystrokes',
+            action='store',
+            help='sequence of keystrokes with optional delays between them',
+            metavar='string | delay',
+            nargs='+',
+            type=types.key_or_delay,
+        )
+
+        self.add_argument(
+            '-l', '--layout',
+            action='store',
+            choices=LAYOUTS.keys(),
+            default=default_keyboard_layout,
+            help=f'keyboard layout (default: {default_keyboard_layout})',
+            type=types.keyboard_layout,
+        )
+
+        self.add_argument(
+            '-w', '--wpm', '--words-per-minute',
+            action='store',
+            default=0,
+            help=(
+                'the average speed at which characters are typed, in words per '
+                'minute. A value of zero will add no delay between keystrokes (default)'
+            ),
+            type=types.words_per_minute,
+        )
+
+        self.add_argument(
+            '-o', '--outfile',
+            action='store',
+            default=open('sketch.ino', 'w+'),
+            help='the output file (default=sketch.ino)',
+            metavar='path',
+            required=False,
+            type=FileType('w+', encoding='utf-8'),
+        )
 
     def _extend_subparsers(self) -> None:
         pass
@@ -67,6 +109,10 @@ class MainArgumentParser(MainArgumentParserTemplate):
     ) -> Namespace:
 
         namespace = super().parse_args(args=args, namespace=namespace)
-        # arguments = vars(namespace)
+
+        namespace.keystrokes = list(itertools.chain(*namespace.keystrokes))
+
+        # inclusion in the choices sequence is checked after any type conversions have been performed.
+        namespace.layout = LAYOUTS[namespace.layout]
 
         return namespace
