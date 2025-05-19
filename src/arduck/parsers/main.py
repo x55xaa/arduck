@@ -78,7 +78,7 @@ class MainArgumentParser(MainArgumentParserTemplate):
         )
 
         self.add_argument(
-            '-w', '--wpm', '--words-per-minute',
+            '-w', '--wpm',
             action='store',
             default=0,
             help=(
