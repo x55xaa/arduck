@@ -19,10 +19,12 @@
 from importlib import resources
 from pathlib import Path
 import shutil
+from typing import TypedDict
 
 from jinja2 import Environment, FileSystemLoader, Template
 
-from arduck.modules import metadata
+from ..modules import metadata
+from ..tokenizer import Keystroke, SleepInterval
 
 
 TEMPLATES_DIRECTORY: Path = Path(
@@ -31,6 +33,13 @@ TEMPLATES_DIRECTORY: Path = Path(
 ENVIRONMENT = Environment(
     loader=FileSystemLoader(TEMPLATES_DIRECTORY)
 )
+
+
+class TemplateParameters(TypedDict):
+    interval_mapping: list[tuple[int, SleepInterval]]
+    keyboard_layout: str
+    keystrokes: list[Keystroke]
+    wpm: int
 
 
 def add(path: Path) -> None:
