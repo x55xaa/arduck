@@ -17,7 +17,12 @@
 
 
 from argparse import Namespace
+import atexit
 import logging
+
+from jinja2 import Template
+
+from .modules.template import TemplateParameters
 
 
 logger = logging.getLogger(__name__)
@@ -31,8 +36,15 @@ def main(namespace: Namespace) -> None:
           Namespace containing the command line parsing.
     """
 
-    logger.debug('helloworld!')
-    logger.info('helloworld!')
-    logger.warning('helloworld!')
-    logger.error('helloworld!')
-    logger.critical('helloworld!')
+    chosen_template: Template = namespace.template
+    template_parameters: TemplateParameters = {
+        'interval_mapping': namespace.interval_mapping,
+        'keyboard_layout': namespace.layout,
+        'keystrokes': namespace.keystrokes,
+        'wpm': namespace.wpm,
+    }
+
+    payload = chosen_template.render(**template_parameters)
+
+    namespace.outfile.write(payload)
+    namespace.outfile.close()
