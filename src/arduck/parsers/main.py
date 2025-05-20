@@ -103,11 +103,10 @@ class MainArgumentParser(MainArgumentParserTemplate):
             type=types.words_per_minute,
         )
 
-        import sys
         self.add_argument(
             '-o', '--outfile',
             action='store',
-            default=sys.stdout,
+            default=default_outfile_name,
             help=f'the output file (default: {default_outfile_name})',
             metavar='path',
             required=False,
