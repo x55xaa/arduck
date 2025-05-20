@@ -178,7 +178,8 @@ def keystrokes_to_arrays(keystrokes: list[RawKeystroke]) -> tuple[list[Keystroke
             keys.append(raw_key)
 
         elif isinstance(raw_key, tuple):
-            keys.extend(('\0', *raw_key, '\0'))
-            shift_correction += 3
+            raw_combo = ('\0', *raw_key, '\0')
+            keys.extend(raw_combo)
+            shift_correction += len(raw_combo) - 1
 
     return keys, interval_mapping
