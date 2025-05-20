@@ -88,10 +88,11 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
                 for i, key in enumerate(combo.copy()):
                     if len(key) > 1:
                         combo[i] = SPECIAL_KEYS.get(combo[i], combo[i])
+                        print(combo[i])
 
                 # flatten one character combos.
-                if len(combo := tuple(filter(lambda k: k, groups[1:]))) > 1:
-                    result.append(combo)
+                if len(combo) > 1:
+                    result.append(tuple(combo))
                 else:
                     result.extend(combo)
 
