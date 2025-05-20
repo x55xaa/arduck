@@ -27,7 +27,7 @@ from typing import Optional, override
 from ..arduino.keyboard import LAYOUTS
 from ..modules import metadata, template
 from ..modules.parsing.parsers import MainArgumentParserTemplate
-from ..tokenizer import keystrokes_to_arrays
+from ..tokenizer import keystrokes_to_arrays, merge_delays
 from . import types
 
 
@@ -142,7 +142,7 @@ class MainArgumentParser(MainArgumentParserTemplate):
         namespace = super().parse_args(args=args, namespace=namespace)
 
         keystrokes, interval_mapping = keystrokes_to_arrays(
-            list(itertools.chain(*namespace.keystrokes))
+            merge_delays(list(itertools.chain(*namespace.keystrokes)))
         )
 
         namespace.keystrokes = keystrokes

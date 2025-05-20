@@ -122,6 +122,32 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
     return result
 
 
+def merge_delays(keystrokes: list[RawKeystroke]) -> list[RawKeystroke]:
+    """Merges adjacent delays."""
+
+    result: list[RawKeystroke] = []
+
+    i: int = 0
+    while i < len(keystrokes):
+        raw_key = keystrokes[i]
+
+        if isinstance(raw_key, str) or isinstance(raw_key, tuple):
+            result.append(raw_key)
+
+            i += 1
+            continue
+
+        consecutive_delays = tuple(
+            takewhile(lambda j: isinstance(j, int), keystrokes[i:])
+        )
+
+        result.append(sum(consecutive_delays))
+        i += len(consecutive_delays)
+
+    print(result)
+    return result
+
+
 def keystrokes_to_arrays(keystrokes: list[RawKeystroke]) -> tuple[list[Keystroke], list[tuple[int, SleepInterval]]]:
     """Translates a sequence of raw keystrokes into an array of keystrokes and
     a sleep interval mapping.
