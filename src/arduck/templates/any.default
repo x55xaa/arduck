@@ -44,7 +44,7 @@ void loop() {
     return;
     {%- else %}
     Keyboard.end();
-    while (1) {} // zzz.
+    while (1) {}  // zzz.
     {%- endif %}
   }
 
