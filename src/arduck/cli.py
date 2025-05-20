@@ -17,7 +17,6 @@
 
 
 from argparse import Namespace
-import atexit
 import logging
 
 from jinja2 import Template
