@@ -3,6 +3,14 @@
 
 
 
+## [0.0.3](https://github.com/x55xaa/arduck/compare/v0.0.1...v0.0.3) - 2025-05-20
+
+### Fixed
+
+- Recognize special keys containing numbers ([0771b54](https://github.com/x55xaa/arduck/commit/0771b54b6d9f633960a56b42fe57529970d3cc3f)) - (Stefano Cuizza)
+- Recognize combos comprised of more than two keys ([efceed2](https://github.com/x55xaa/arduck/commit/efceed2f4e3c1292c8c0960229e03244c9ecaa4d)) - (Stefano Cuizza)
+
+
 ## [0.0.1](https://github.com/x55xaa/arduck/releases/tag/v0.0.1) - 2025-05-20
 
 _🌱 Initial release._
