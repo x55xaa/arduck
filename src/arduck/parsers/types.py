@@ -1,5 +1,4 @@
 """Contains argument types."""
-from typing import Union, Literal
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -16,6 +15,8 @@ from typing import Union, Literal
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
+from typing import Literal
 
 from jinja2 import Template
 
