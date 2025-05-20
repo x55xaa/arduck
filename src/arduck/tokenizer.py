@@ -24,6 +24,8 @@ from .arduino.keyboard import SPECIAL_KEYS
 
 
 type RawKeystroke = str | tuple[str, ...]
+type Keystroke = str
+type SleepInterval = int
 
 
 FORBIDDEN_CHARACTERS: tuple[str, ...] = ('\t', '\n', '\r', '\f', '\v')
@@ -49,6 +51,7 @@ def _is_part_of_uppercase_word(c: str) -> bool:
 
 def to_keystrokes(string: str) -> list[RawKeystroke]:
     """Transforms a string of characters into a sequence of key presses.
+
 
     ==============
     Interpretation
@@ -79,7 +82,15 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             case 'CHARACTER':
                 result.append(groups[-1])
             case 'COMBO':
-                if len(combo := tuple(filter(lambda i: i, groups[1:]))) > 1:
+                combo = list(filter(lambda k: k, groups[1:]))
+
+                # handle abbreviated special keys.
+                for i, key in enumerate(combo.copy()):
+                    if len(key) > 1:
+                        combo[i] = SPECIAL_KEYS.get(combo[i], combo[i])
+
+                # flatten one character combos.
+                if len(combo := tuple(filter(lambda k: k, groups[1:]))) > 1:
                     result.append(combo)
                 else:
                     result.extend(combo)
@@ -92,6 +103,8 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             i += 1
             continue
 
+        # simulate the use of the `KEY_CAPS_LOCK` key with sequences of
+        # uppercase characters that are longer than two letters.
         if key.isupper():
             word = tuple(takewhile(_is_part_of_uppercase_word, result[i:]))
 
@@ -107,3 +120,35 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
         i += 1
 
     return result
+
+
+def keystrokes_to_arrays(keystrokes: list[RawKeystroke]) -> tuple[list[Keystroke], list[tuple[int, SleepInterval]]]:
+    """Translates a sequence of raw keystrokes into an array of keystrokes and
+    a sleep interval mapping.
+
+
+    ========
+    Examples
+    ========
+
+    The following sequence:
+        [('LEFT_GUI', 'r'), 'c', 'm', 'd', '\n', 200, 'l', 's', '\n']
+    Gets translated to:
+        ['\0', 'LEFT_GUI', 'r', '\0', 'c', 'm', 'd', '\n', 'l', 's', '\n']
+        [(6, 200)]
+    """
+
+    keys: list[Keystroke] = []
+    interval_mapping: list[tuple[int, SleepInterval]] = []
+
+    for i, raw_key in enumerate(keystrokes):
+        if isinstance(raw_key, int):
+            interval_mapping.append((i, raw_key))
+
+        elif isinstance(raw_key, str):
+            keys.append(raw_key)
+
+        elif isinstance(raw_key, tuple):
+            keys.extend(('\0', *raw_key, '\0'))
+
+    return keys, interval_mapping
