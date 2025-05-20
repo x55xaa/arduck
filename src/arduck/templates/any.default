@@ -28,6 +28,7 @@ void setup() {
 
 
 void loop() {
+  {%- if interval_mapping|length != 0 %}
   // delays.
   switch (i) {
   {%- for index, sleep_interval in interval_mapping %}
@@ -35,6 +36,7 @@ void loop() {
       delay({{ sleep_interval }});
   {%- endfor %}
   }
+  {%- endif -%}
 
   // injection complete.
   if (i == LENGTH) {
