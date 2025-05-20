@@ -141,14 +141,17 @@ def keystrokes_to_arrays(keystrokes: list[RawKeystroke]) -> tuple[list[Keystroke
     keys: list[Keystroke] = []
     interval_mapping: list[tuple[int, SleepInterval]] = []
 
+    shift_correction: int = 0
     for i, raw_key in enumerate(keystrokes):
         if isinstance(raw_key, int):
-            interval_mapping.append((i, raw_key))
+            interval_mapping.append((i + shift_correction, raw_key))
+            shift_correction -= 1
 
         elif isinstance(raw_key, str):
             keys.append(raw_key)
 
         elif isinstance(raw_key, tuple):
             keys.extend(('\0', *raw_key, '\0'))
+            shift_correction += 3
 
     return keys, interval_mapping
