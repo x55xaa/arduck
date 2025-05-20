@@ -28,24 +28,25 @@ void setup() {
 
 
 void loop() {
+  // delays.
+  switch (i) {
+  {%- for index, sleep_interval in interval_mapping %}
+    case {{ index }}:
+      delay({{ sleep_interval }});
+  {%- endfor %}
+  }
+
+  // injection complete.
   if (i == LENGTH) {
-    // injection complete.
     {%- if do_repeat is not false %}
     i = 0;
-    {%- set delay_stmt = "delay(" ~ do_repeat ~ ");" %}
-    {{- " "+delay_stmt if do_repeat != 0 }}
+    {{- " delay(" ~ do_repeat ~ ");" if do_repeat != 0 }}
     return;
     {%- else %}
     Keyboard.end();
     while (1) {} // zzz.
     {%- endif %}
   }
-
-  {%- for index, sleep_interval in interval_mapping -%}
-  {{ "" }} else if (i == {{ index }}) {
-    delay({{ sleep_interval }});
-  }
-  {%- endfor %}
 
   if (KEYSTROKES[i] == 0) {
     if (isPressed) {
