@@ -25,8 +25,9 @@ import logging
 from typing import Optional, override
 
 from ..arduino.keyboard import LAYOUTS
-from ..modules import metadata
+from ..modules import metadata, template
 from ..modules.parsing.parsers import MainArgumentParserTemplate
+from ..tokenizer import keystrokes_to_arrays
 from . import types
 
 
@@ -58,6 +59,8 @@ class MainArgumentParser(MainArgumentParserTemplate):
 
     def _extend_arguments(self) -> None:
         default_keyboard_layout: str = 'us'
+        default_outfile_name: str = 'sketch.ino'
+        default_template_name: str = 'any.default'
 
         self.add_argument(
             'keystrokes',
@@ -73,8 +76,20 @@ class MainArgumentParser(MainArgumentParserTemplate):
             action='store',
             choices=LAYOUTS.keys(),
             default=default_keyboard_layout,
-            help=f'keyboard layout (default: {default_keyboard_layout})',
+            help='keyboard layout (default: %(default)s)',
             type=types.keyboard_layout,
+        )
+
+        self.add_argument(
+            '-t', '--template',
+            action='store',
+            choices=template.enum(),
+            default=default_template_name,
+            help=(
+                'the sketch template to use to generate '
+                'the payload (default: %(default)s)'
+            ),
+            type=types.template,
         )
 
         self.add_argument(
@@ -88,11 +103,12 @@ class MainArgumentParser(MainArgumentParserTemplate):
             type=types.words_per_minute,
         )
 
+        import sys
         self.add_argument(
             '-o', '--outfile',
             action='store',
-            default=open('sketch.ino', 'w+'),
-            help='the output file (default=sketch.ino)',
+            default=sys.stdout,
+            help=f'the output file (default: {default_outfile_name})',
             metavar='path',
             required=False,
             type=FileType('w+', encoding='utf-8'),
@@ -110,7 +126,12 @@ class MainArgumentParser(MainArgumentParserTemplate):
 
         namespace = super().parse_args(args=args, namespace=namespace)
 
-        namespace.keystrokes = list(itertools.chain(*namespace.keystrokes))
+        keystrokes, interval_mapping = keystrokes_to_arrays(
+            list(itertools.chain(*namespace.keystrokes))
+        )
+
+        namespace.keystrokes = keystrokes
+        namespace.interval_mapping = interval_mapping
 
         # inclusion in the choices sequence is checked after any type conversions have been performed.
         namespace.layout = LAYOUTS[namespace.layout]

@@ -16,8 +16,11 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from jinja2 import Template
+
 from .. import tokenizer
 from ..arduino.keyboard import LAYOUTS
+from ..modules import template as template_
 from ..tokenizer import RawKeystroke
 
 
@@ -67,6 +70,12 @@ def keyboard_layout(argument: str) -> str:
         raise ValueError from e
 
     return argument
+
+
+def template(argument: str) -> Template:
+    """A valid sketch template."""
+
+    return template_.get(argument)
 
 
 def words_per_minute(argument: str) -> int:
