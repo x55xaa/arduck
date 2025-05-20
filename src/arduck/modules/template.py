@@ -36,6 +36,8 @@ ENVIRONMENT = Environment(
 
 
 class TemplateParameters(TypedDict):
+    """Parameters accepted by a template."""
+
     do_repeat: Literal[False] | int
     interval_mapping: list[tuple[int, SleepInterval]]
     keyboard_layout: str
