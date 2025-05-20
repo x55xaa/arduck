@@ -30,10 +30,12 @@ type SleepInterval = int
 
 FORBIDDEN_CHARACTERS: tuple[str, ...] = ('\t', '\n', '\r', '\f', '\v')
 TOKENS: dict[str, str] = {
-    'COMBO': r'<([A-Z0-9_]+|[^A-Z])(?:\+([A-Z0-9_]+|[^A-Z]))*>',
+    'COMBO': r'<(?:[A-Z0-9_]+|[^A-Z])(?:\+(?:[A-Z0-9_]+|[^A-Z]))*>',
     'CHARACTER': r'(.)',
 }
 """Recognized tokens."""
+
+COMBO_KEY: str = r'([A-Z0-9_]+|[^A-Z])'
 
 
 class Token(NamedTuple):
@@ -82,7 +84,7 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             case 'CHARACTER':
                 result.append(groups[-1])
             case 'COMBO':
-                combo = list(filter(lambda k: k, groups[1:]))
+                combo = groups[0].strip('<>').split('+')
 
                 # handle abbreviated special keys.
                 for i, key in enumerate(combo.copy()):
