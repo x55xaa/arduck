@@ -30,7 +30,7 @@ type SleepInterval = int
 
 FORBIDDEN_CHARACTERS: tuple[str, ...] = ('\t', '\n', '\r', '\f', '\v')
 TOKENS: dict[str, str] = {
-    'COMBO': r'<([A-Z_]+|[^A-Z])(?:\+([A-Z_]+|[^A-Z]))*>',
+    'COMBO': r'<([A-Z0-9_]+|[^A-Z])(?:\+([A-Z0-9_]+|[^A-Z]))*>',
     'CHARACTER': r'(.)',
 }
 """Recognized tokens."""
