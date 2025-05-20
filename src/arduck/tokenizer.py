@@ -88,7 +88,6 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
                 for i, key in enumerate(combo.copy()):
                     if len(key) > 1:
                         combo[i] = SPECIAL_KEYS.get(combo[i], combo[i])
-                        print(combo[i])
 
                 # flatten one character combos.
                 if len(combo) > 1:
