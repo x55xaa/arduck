@@ -8,9 +8,9 @@
 
 ## Overview
 
-This package offers an easy way to generate keystroke injection scripts. It supports a variety of [boards](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/#Compatible%20Hardware) and [keyboard layouts](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/keyboardBegin/#Keyboard%20layouts).
+This package provides a simple and flexible way to generate keystroke injection scripts. It supports a variety of [boards](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/#Compatible%20Hardware) and [keyboard layouts](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/keyboardBegin/#Keyboard%20layouts).
 
-There is no need to get some overpriced usb stick to get the job done (rubberducky _cough cough_); just get an Arduino board that is compatible with the [Keyboard.h](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard) library, and you are good to go!
+Rather than relying on expensive proprietary devices (rubberducky _cough cough_), you can use any Arduino-compatible board that supports the [Keyboard.h](https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard) library.
 
 
 ## Installation
@@ -24,7 +24,51 @@ $ pip install arduck
 
 ## Usage
 
-This package can be used as a library or through the `duck` console script. More information is present in the docs.
+Start generating payloads right away with the `duck` console script:
+
+```bash
+$ duck "helloworld!\n"
+```
+
+This will create a `sketch.ino` file in the current working directory.
+Compiling and uploading the code to an Arduino board will make it emulate the keystrokes when plugged into a computer.
+Be ready to quickly disconnect the board to avoid **triggering the payload on your machine**.
+
+
+### Special Keys
+
+To inject _special keys_ (e.g. `CAPS_LOCK`), wrap them in `<>`.
+When specifying a _special key_, the `KEY_` prefix can be omitted.
+
+```bash
+$ duck "<F1>"
+```
+
+All default special keys are listed [here](https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/#_keyboard_modifiers).
+Note that some keyboards may have support for other non-standard keys.
+
+
+### Key Combinations
+
+To emulate pressing multiple keys at once wrap them in `<>`, separated by a `+`.
+
+```bash
+$ duck "<LEFT_GUI+r>calc.exe\n"
+```
+
+
+### Add delays
+
+An optional delay in milliseconds can be added in between strings in the input.
+
+```bash
+$ duck "<LEFT_GUI+r>" 700 "notepad.exe\n" 500 "hello\n" "world!\n"
+```
+
+
+### More Features
+
+Check out the official documentation for a more comprehensive list of features.
 
 
 ## A Word of Caution
