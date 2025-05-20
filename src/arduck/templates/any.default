@@ -1,0 +1,59 @@
+#include <Keyboard.h>
+
+#define KEYPRESS_DELAY {{ (1000 / ((wpm * 5) / 60)) | int if wpm else 0 }}
+
+
+const char KEYSTROKES[{{ keystrokes | length }}] = {
+{%- for key in keystrokes -%}
+  {%- if key|length == 1 -%}
+    '{{ key | replace("\0", "\\0") | replace("\f","\\f") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") | replace("\v","\\v") }}'
+  {%- else -%}
+    {{ key }}
+  {%- endif -%}
+
+  {{ ", " if not loop.last else "" }}
+{%- endfor -%}
+};
+
+unsigned int i = 0;
+bool isPressed = false;
+
+
+void setup() {
+  randomSeed(analogRead(0));
+
+  Keyboard.begin({{ keyboard_layout }});
+  delay(2000);
+}
+
+
+void loop() {
+  if (i == {{ keystrokes | length }}) {
+    Keyboard.end();
+    while (1) {} // zzz.
+  }
+
+  {%- for index, sleep_interval in interval_mapping -%}
+  {{ "" }} else if (i == {{ index }}) {
+    delay({{ sleep_interval }});
+  }
+  {%- endfor %}
+
+  if (KEYSTROKES[i] == 0) {
+    if (isPressed) {
+      Keyboard.releaseAll();
+    }
+
+    isPressed = !isPressed;
+  } else {
+    if (isPressed) {
+      Keyboard.press(KEYSTROKES[i]);
+    } else {
+      Keyboard.write(KEYSTROKES[i]);
+    }
+
+    delay(KEYPRESS_DELAY + random((int) (0.1 * KEYPRESS_DELAY)));
+  }
+
+  i++;
+}
