@@ -1,6 +1,7 @@
-tool
+duck
 ====
 
 .. argparse::
-    :module: tool.parsers.main
+    :module: arduck.parsers.main
     :func: _construct
+    :nodefault:
