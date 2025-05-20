@@ -144,7 +144,6 @@ def merge_delays(keystrokes: list[RawKeystroke]) -> list[RawKeystroke]:
         result.append(sum(consecutive_delays))
         i += len(consecutive_delays)
 
-    print(result)
     return result
 
 
