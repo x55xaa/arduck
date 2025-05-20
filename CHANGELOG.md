@@ -3,6 +3,13 @@
 
 
 
+## [0.0.2](https://github.com/x55xaa/arduck/compare/v0.0.1...v0.0.2) - 2025-05-20
+
+### Fixed
+
+- Recognize special keys containing numbers ([0771b54](https://github.com/x55xaa/arduck/commit/0771b54b6d9f633960a56b42fe57529970d3cc3f)) - (Stefano Cuizza)
+
+
 ## [0.0.1](https://github.com/x55xaa/arduck/releases/tag/v0.0.1) - 2025-05-20
 
 _🌱 Initial release._
