@@ -109,7 +109,6 @@ class MainArgumentParser(MainArgumentParserTemplate):
             default=default_outfile_name,
             help=f'the output file (default: {default_outfile_name})',
             metavar='path',
-            required=False,
             type=FileType('w+', encoding='utf-8'),
         )
 
