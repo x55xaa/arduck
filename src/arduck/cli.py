@@ -37,6 +37,7 @@ def main(namespace: Namespace) -> None:
 
     chosen_template: Template = namespace.template
     template_parameters: TemplateParameters = {
+        'do_repeat': namespace.repeat,
         'interval_mapping': namespace.interval_mapping,
         'keyboard_layout': namespace.layout,
         'keystrokes': namespace.keystrokes,

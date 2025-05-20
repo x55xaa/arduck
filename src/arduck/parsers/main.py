@@ -61,6 +61,7 @@ class MainArgumentParser(MainArgumentParserTemplate):
         default_keyboard_layout: str = 'us'
         default_outfile_name: str = 'sketch.ino'
         default_template_name: str = 'any.default'
+        default_wpm: int = 180
 
         self.add_argument(
             'keystrokes',
@@ -95,12 +96,28 @@ class MainArgumentParser(MainArgumentParserTemplate):
         self.add_argument(
             '-w', '--wpm',
             action='store',
-            default=0,
+            default=default_wpm,
             help=(
-                'the average speed at which characters are typed, in words per '
-                'minute. A value of zero will add no delay between keystrokes (default)'
+                'the average speed at which characters are '
+                'typed, in words per minute. A value of zero '
+                'will add no delay between keystrokes '
+                '(default: %(default)d)'
             ),
             type=types.words_per_minute,
+        )
+
+        self.add_argument(
+            '-r', '--repeat',
+            action='store',
+            const=0,
+            default=False,
+            metavar='ms',
+            nargs='?',
+            help=(
+                'repeat the injection in a loop. Optionally '
+                'specify a delay between repetitions in milliseconds'
+            ),
+            type=types.repeat_every,
         )
 
         self.add_argument(

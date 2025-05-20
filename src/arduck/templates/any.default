@@ -1,10 +1,10 @@
 #include <Keyboard.h>
 
 #define KEYPRESS_DELAY {{ (1000 / ((wpm * 5) / 60)) | int if wpm else 0 }}
+#define LENGTH {{ keystrokes | length }}
 
-
-const char KEYSTROKES[{{ keystrokes | length }}] = {
-{%- for key in keystrokes -%}
+const char KEYSTROKES[LENGTH] = {
+{%- for key in keystrokes %}
   {%- if key|length == 1 -%}
     '{{ key | replace("\0", "\\0") | replace("\f","\\f") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") | replace("\v","\\v") }}'
   {%- else -%}
@@ -28,9 +28,17 @@ void setup() {
 
 
 void loop() {
-  if (i == {{ keystrokes | length }}) {
+  if (i == LENGTH) {
+    // injection complete.
+    {%- if do_repeat is not false %}
+    i = 0;
+    {%- set delay_stmt = "delay(" ~ do_repeat ~ ");" %}
+    {{- " "+delay_stmt if do_repeat != 0 }}
+    return;
+    {%- else %}
     Keyboard.end();
     while (1) {} // zzz.
+    {%- endif %}
   }
 
   {%- for index, sleep_interval in interval_mapping -%}

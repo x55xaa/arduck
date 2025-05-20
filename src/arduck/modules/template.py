@@ -19,7 +19,7 @@
 from importlib import resources
 from pathlib import Path
 import shutil
-from typing import TypedDict
+from typing import Literal, TypedDict
 
 from jinja2 import Environment, FileSystemLoader, Template
 
@@ -36,6 +36,7 @@ ENVIRONMENT = Environment(
 
 
 class TemplateParameters(TypedDict):
+    do_repeat: Literal[False] | int
     interval_mapping: list[tuple[int, SleepInterval]]
     keyboard_layout: str
     keystrokes: list[Keystroke]

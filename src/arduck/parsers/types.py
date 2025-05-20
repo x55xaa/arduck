@@ -1,4 +1,5 @@
 """Contains argument types."""
+from typing import Union, Literal
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -76,6 +77,15 @@ def template(argument: str) -> Template:
     """A valid sketch template."""
 
     return template_.get(argument)
+
+
+def repeat_every(argument: Literal[False] | str) -> Literal[False] | int:
+    """Optionally repeat the injection every n milliseconds."""
+
+    if isinstance(argument, bool) and argument is False:
+        return argument
+
+    return int(argument)
 
 
 def words_per_minute(argument: str) -> int:
