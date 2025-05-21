@@ -105,20 +105,6 @@ def to_keystrokes(string: str) -> list[RawKeystroke]:
             i += 1
             continue
 
-        # simulate the use of the `KEY_CAPS_LOCK` key with sequences of
-        # uppercase characters that are longer than two letters.
-        if key.isupper():
-            word = tuple(takewhile(_is_part_of_uppercase_word, result[i:]))
-
-            if len(word) > 1:
-                for j in range(len(word)):
-                    result[i + j] = result[i + j].lower()
-
-                result.insert(i, SPECIAL_KEYS['CAPS_LOCK'])
-                result.insert(i + len(word) + 1, SPECIAL_KEYS['CAPS_LOCK'])
-
-                i += len(word)
-
         i += 1
 
     return result
