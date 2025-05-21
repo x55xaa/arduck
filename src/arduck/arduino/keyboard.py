@@ -18,15 +18,15 @@
 
 # https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/keyboardBegin/#Keyboard%20layouts.
 LAYOUTS: dict[str, str] = {
-    'dk': 'KeyboardLayout_da_DK',
-    'de': 'KeyboardLayout_de_DE',
-    'us': 'KeyboardLayout_en_US',
-    'es': 'KeyboardLayout_es_ES',
-    'fr': 'KeyboardLayout_fr_FR',
-    'hu': 'KeyboardLayout_hu_HU',
-    'it': 'KeyboardLayout_it_IT',
-    'pt': 'KeyboardLayout_pt_PT',
-    'se': 'KeyboardLayout_sv_SE',
+    'dk': 'da_DK',
+    'de': 'de_DE',
+    'us': 'en_US',
+    'es': 'es_ES',
+    'fr': 'fr_FR',
+    'hu': 'hu_HU',
+    'it': 'it_IT',
+    'pt': 'pt_PT',
+    'se': 'sv_SE',
 }
 
 # https://docs.arduino.cc/language-reference/en/functions/usb/Keyboard/keyboardModifiers/.

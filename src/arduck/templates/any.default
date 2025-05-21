@@ -1,4 +1,5 @@
 #include <Keyboard.h>
+{{ "#include <Keyboard_" + keyboard_layout + ".h>\n\n" if keyboard_layout != "en_US" else "\n" -}}
 
 #define KEYPRESS_DELAY {{ (1000 / ((wpm * 5) / 60)) | int if wpm else 0 }}
 #define LENGTH {{ keystrokes | length }}
@@ -22,7 +23,7 @@ bool isPressed = false;
 void setup() {
   randomSeed(analogRead(0));
 
-  Keyboard.begin({{ keyboard_layout }});
+  Keyboard.begin(KeyboardLayout_{{ keyboard_layout }});
   delay(2000);
 }
 
