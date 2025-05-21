@@ -150,5 +150,6 @@ class MainArgumentParser(MainArgumentParserTemplate):
 
         # inclusion in the choices sequence is checked after any type conversions have been performed.
         namespace.layout = LAYOUTS[namespace.layout]
+        namespace.template = template.get(namespace.template)
 
         return namespace

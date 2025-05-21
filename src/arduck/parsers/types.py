@@ -18,7 +18,7 @@
 
 from typing import Literal
 
-from jinja2 import Template
+from jinja2 import TemplateNotFound
 
 from .. import tokenizer
 from ..arduino.keyboard import LAYOUTS
@@ -74,10 +74,15 @@ def keyboard_layout(argument: str) -> str:
     return argument
 
 
-def template(argument: str) -> Template:
+def template(argument: str) -> str:
     """A valid sketch template."""
 
-    return template_.get(argument)
+    try:
+     _template = template_.get(argument)
+    except TemplateNotFound as e:
+        raise ValueError from e
+
+    return argument
 
 
 def repeat_every(argument: Literal[False] | str) -> Literal[False] | int:
