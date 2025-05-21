@@ -35,6 +35,22 @@ ENVIRONMENT = Environment(
 )
 
 
+def btoi_filter(byte: bytes) -> int:
+    """"""
+
+    return int.from_bytes(byte)
+
+
+def encode_filter(value: str, encoding: str) -> bytes:
+    """"""
+
+    return value.encode(encoding)
+
+
+ENVIRONMENT.filters['btoi'] = btoi_filter
+ENVIRONMENT.filters['encode'] = encode_filter
+
+
 class TemplateParameters(TypedDict):
     """Parameters accepted by a template."""
 
