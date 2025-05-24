@@ -60,7 +60,7 @@ class MainArgumentParser(MainArgumentParserTemplate):
     def _extend_arguments(self) -> None:
         default_keyboard_layout: str = 'us'
         default_outfile_name: str = 'sketch.ino'
-        default_template_name: str = 'any.default'
+        default_template_name: str = 'any'
         default_wpm: int = 180
 
         self.add_argument(
