@@ -1,0 +1,12 @@
+{%- set _keystrokes_prefix = ['\0', 'KEY_LEFT_GUI', 'r', '\0'] -%}
+{%- set keystrokes = _keystrokes_prefix + keystrokes -%}
+
+{%- set _interval_mapping_prefix = [(0, 200)] -%}
+{%- set interval_mapping = _interval_mapping_prefix + interval_mapping -%}
+
+{%- for index, interval in interval_mapping -%}
+  {%- set _ = interval_mapping.pop(loop.index - 1) -%}
+  {%- set _ = interval_mapping.insert(loop.index - 1, (index + (_keystrokes_prefix | length), interval)) -%}
+{%- endfor -%}
+
+{% include '_components/any' %}
