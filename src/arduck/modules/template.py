@@ -81,7 +81,7 @@ def enum() -> list[str]:
         if not any(map(lambda s: s.startswith('_'), template.split('/')))
     )
 
-    return visible_templates
+    return list(map(lambda t: (t if t.split('/')[-1] != 'init' else t.split('/')[:-1]), visible_templates))
 
 
 def get(name: str) -> Template:
