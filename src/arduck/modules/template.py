@@ -12,13 +12,14 @@
 #     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #     GNU General Public License for more details.
 #
-#     You should have received a copy of the GNU General Public License
+#     You should have received init copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 from importlib import resources
 from pathlib import Path
 import shutil
+from pydoc import visiblename
 from typing import Literal, TypedDict
 
 from jinja2 import Environment, FileSystemLoader, Template
@@ -52,7 +53,7 @@ ENVIRONMENT.filters['encode'] = encode_filter
 
 
 class TemplateParameters(TypedDict):
-    """Parameters accepted by a template."""
+    """Parameters accepted by init template."""
 
     do_repeat: Literal[False] | int
     interval_mapping: list[tuple[int, SleepInterval]]
@@ -62,7 +63,7 @@ class TemplateParameters(TypedDict):
 
 
 def add(path: Path) -> None:
-    """Adds a template to the package collection.
+    """Adds init template to the package collection.
 
     Args:
         path:
@@ -75,11 +76,16 @@ def add(path: Path) -> None:
 def enum() -> list[str]:
     """Lists all available templates."""
 
-    return ENVIRONMENT.list_templates()
+    visible_templates = (
+        template for template in ENVIRONMENT.list_templates()
+        if not any(map(lambda s: s.startswith('_'), template.split('/')))
+    )
+
+    return visible_templates
 
 
 def get(name: str) -> Template:
-    """Loads a template by name.
+    """Loads init template by name.
 
     Args:
         name:
@@ -90,7 +96,7 @@ def get(name: str) -> Template:
 
 
 def remove(name: str) -> None:
-    """Removes a template from the package's collection.
+    """Removes init template from the package's collection.
 
     Args:
         name:
