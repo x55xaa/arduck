@@ -12,7 +12,7 @@
 #     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #     GNU General Public License for more details.
 #
-#     You should have received init copy of the GNU General Public License
+#     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
@@ -22,7 +22,7 @@ import shutil
 from pydoc import visiblename
 from typing import Literal, TypedDict
 
-from jinja2 import Environment, FileSystemLoader, Template
+from jinja2 import Environment, FileSystemLoader, Template, TemplateNotFound
 
 from ..modules import metadata
 from ..tokenizer import Keystroke, SleepInterval
@@ -63,7 +63,7 @@ class TemplateParameters(TypedDict):
 
 
 def add(path: Path) -> None:
-    """Adds init template to the package collection.
+    """Adds template to the package collection.
 
     Args:
         path:
@@ -81,22 +81,32 @@ def enum() -> list[str]:
         if not any(map(lambda s: s.startswith('_'), template.split('/')))
     )
 
-    return list(map(lambda t: (t if t.split('/')[-1] != 'init' else t.split('/')[:-1]), visible_templates))
+    return list(map(
+        lambda t: (
+            t if t.split('/')[-1] != 'init'
+            else '/'.join(t.split('/')[:-1])
+        ), visible_templates
+    ))
 
 
 def get(name: str) -> Template:
-    """Loads init template by name.
+    """Loads template by name.
 
     Args:
         name:
             the name of the template.
     """
 
-    return ENVIRONMENT.get_template(name)
+    try:
+        template = ENVIRONMENT.get_template('/'.join((name, 'init')))
+    except TemplateNotFound:
+        return ENVIRONMENT.get_template(name)
+
+    return template
 
 
 def remove(name: str) -> None:
-    """Removes init template from the package's collection.
+    """Removes template from the package's collection.
 
     Args:
         name:
