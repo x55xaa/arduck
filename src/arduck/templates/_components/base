@@ -19,6 +19,7 @@ void doProgrammedSleep(unsigned int i) {
   {%- for index, sleep_interval in interval_mapping %}
     case {{ index }}:
       delay({{ sleep_interval }});
+      break;
   {%- endfor %}
   }
   {%- endif %}
