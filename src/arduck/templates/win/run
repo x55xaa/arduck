@@ -1,5 +1,5 @@
 {%- set __prefix_keystrokes = ["\0", "KEY_LEFT_GUI", "r", "\0"] -%}
-{%- set __prefix_interval_mapping = [(4, 200)] -%}
+{%- set __prefix_interval_mapping = [(4, 500)] -%}
 
 
 {%- set keystrokes = __prefix_keystrokes + keystrokes -%}
