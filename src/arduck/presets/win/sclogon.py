@@ -17,7 +17,6 @@
 
 
 from argparse import ArgumentParser
-import itertools
 
 from ...parsers.presets.sclogon import ScLogonArgumentParser
 from ...tokenizer import RawKeystroke
