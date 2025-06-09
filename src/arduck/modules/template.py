@@ -1,4 +1,4 @@
-"""Provides easy access to the package metadata."""
+"""Allows easy access to payload templates."""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -17,9 +17,8 @@
 
 
 from importlib import resources
-from pathlib import Path
+from pathlib import Path, PurePath
 import shutil
-from pydoc import visiblename
 from typing import Literal, TypedDict
 
 from jinja2 import Environment, FileSystemLoader, Template, TemplateNotFound
@@ -76,17 +75,16 @@ def add(path: Path) -> None:
 def enum() -> list[str]:
     """Lists all available templates."""
 
-    visible_templates = (
-        template for template in ENVIRONMENT.list_templates()
+    available_templates = (
+        PurePath(template) for template in ENVIRONMENT.list_templates()
         if not any(map(lambda s: s.startswith('_'), template.split('/')))
     )
 
-    return list(map(
-        lambda t: (
-            t if t.split('/')[-1] != 'init'
-            else '/'.join(t.split('/')[:-1])
-        ), visible_templates
-    ))
+    return [
+        template_path.parent.as_posix() if template_path.stem == 'init'
+        else template_path.as_posix().split('.', maxsplit=1)[0]
+        for template_path in available_templates
+    ]
 
 
 def get(name: str) -> Template:
