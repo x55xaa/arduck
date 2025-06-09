@@ -26,7 +26,7 @@ from random import choices, randint
 from string import ascii_letters, digits
 from typing import Optional, override
 
-from ...modules.parsing.parsers import MainArgumentParserTemplate
+from . import PresetArgumentParser
 
 logger = logging.getLogger(__name__)
 
@@ -41,14 +41,14 @@ def _construct() -> ArgumentParser:
     return ScLogonArgumentParser()
 
 
-class ScLogonArgumentParser(MainArgumentParserTemplate):
+class ScLogonArgumentParser(PresetArgumentParser):
     """"""
 
     @override
     def __init__(self):
         super().__init__(
-            prog='sclogon-preset',
-            description='Schedule task to run on logon with Task Scheduler.',
+            prog='sclogon',
+            description='schedule task to run on logon with Task Scheduler.',
             prefix_chars='-',
         )
 

@@ -19,7 +19,7 @@
 from argparse import ArgumentParser
 import itertools
 
-from ...parsers.presets import ScLogonArgumentParser
+from ...parsers.presets.sclogon import ScLogonArgumentParser
 from ...tokenizer import RawKeystroke
 
 

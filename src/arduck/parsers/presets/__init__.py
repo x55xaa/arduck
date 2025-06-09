@@ -16,7 +16,16 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from .sclogon import ScLogonArgumentParser
+from ...modules.parsing.parsers import MainArgumentParserTemplate
 
 
-__all__ = ['ScLogonArgumentParser']
+class PresetArgumentParser(MainArgumentParserTemplate):
+    """"""
+
+    def __init__(self, *args, **kwargs):
+        """"""
+
+        if 'prog' in kwargs:
+            kwargs['prog'] = f'{kwargs['prog']}-preset'
+
+        super().__init__(*args, **kwargs)
