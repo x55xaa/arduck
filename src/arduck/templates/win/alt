@@ -1,4 +1,4 @@
-{% extends '_components/any' %}
+{% extends 'any' %}
 
 {%- set vars = namespace(hold_down=false, special_keys=[]) -%}
 
