@@ -24,6 +24,7 @@ See https://sphinx-argparse.readthedocs.io/en/stable for more information.
 
 
 from .main import MainArgumentParser
+from .presets.sclogon import ScLogonArgumentParser
 
 
-__all__ = ['MainArgumentParser']
+__all__ = ['MainArgumentParser', 'ScLogonArgumentParser']
