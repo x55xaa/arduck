@@ -25,7 +25,7 @@ import logging
 from typing import Optional, override
 
 from ..arduino.keyboard import LAYOUTS
-from ..modules import metadata, template
+from ..modules import metadata, preset, template
 from ..modules.parsing.parsers import MainArgumentParserTemplate
 from ..tokenizer import keystrokes_to_arrays, merge_delays
 from . import types
@@ -79,6 +79,15 @@ class MainArgumentParser(MainArgumentParserTemplate):
             default=default_keyboard_layout,
             help='keyboard layout (default: %(default)s)',
             type=types.keyboard_layout,
+        )
+
+        self.add_argument(
+            '-p', '--preset',
+            action='store',
+            choices=preset.enum(),
+            help='the preset to use',
+            required=False,
+            type=types.preset,
         )
 
         self.add_argument(
@@ -141,15 +150,18 @@ class MainArgumentParser(MainArgumentParserTemplate):
 
         namespace = super().parse_args(args=args, namespace=namespace)
 
+        # inclusion in the choices sequence is checked after any type conversions have been performed.
+        namespace.layout = LAYOUTS[namespace.layout]
+        namespace.template = template.get(namespace.template)
+
+        if namespace.preset:
+            namespace.keystrokes = preset.get(namespace.preset).apply(namespace.keystrokes)
+
         keystrokes, interval_mapping = keystrokes_to_arrays(
             merge_delays(list(itertools.chain(*namespace.keystrokes)))
         )
 
         namespace.keystrokes = keystrokes
         namespace.interval_mapping = interval_mapping
-
-        # inclusion in the choices sequence is checked after any type conversions have been performed.
-        namespace.layout = LAYOUTS[namespace.layout]
-        namespace.template = template.get(namespace.template)
 
         return namespace

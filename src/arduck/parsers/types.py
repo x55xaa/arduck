@@ -22,7 +22,7 @@ from jinja2 import TemplateNotFound
 
 from .. import tokenizer
 from ..arduino.keyboard import LAYOUTS
-from ..modules import template as template_
+from ..modules import preset as preset_, template as template_
 from ..tokenizer import RawKeystroke
 
 
@@ -81,6 +81,14 @@ def template(argument: str) -> str:
      _template = template_.get(argument)
     except TemplateNotFound as e:
         raise ValueError from e
+
+    return argument
+
+
+def preset(argument: str) -> str:
+    """A valid sketch preset."""
+
+    _preset = preset_.get(argument)
 
     return argument
 
