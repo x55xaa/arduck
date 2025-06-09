@@ -34,7 +34,7 @@ def apply(raw_keystrokes: list[list[RawKeystroke]]) -> list[list[RawKeystroke]]:
 
     return [
         [('KEY_LEFT_GUI', 'r')], [500],
-        ['t', 'a', 's', 'k', 's', 'c', 'h', 'd', '.', 'm', 's', 'c', '\n'], [2000],
+        list('taskschd.msc\n'), [2000],
         [('KEY_LEFT_ALT', 'a'), 'r'], [200],
         [('KEY_LEFT_ALT', 'e')], [200],
         [('KEY_LEFT_ALT', 'd')], [200],
