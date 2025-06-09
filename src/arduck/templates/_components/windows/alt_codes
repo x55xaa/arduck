@@ -7,7 +7,7 @@
 
 {%- for key in keystrokes %}
   {%- if key|length == 1 -%}
-    {%- set char = key | replace("\0", "\\0") | replace("\f","\\f") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") | replace("\v","\\v") -%}
+    {%- set char = key | replace("\\", "\\\\") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") -%}
 
     {%- if key == "\0" -%}
       {%- set vars.hold_down = not vars.hold_down -%}

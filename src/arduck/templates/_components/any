@@ -3,7 +3,7 @@
 {% block keystrokes_array %}
 {%- for key in keystrokes %}
   {%- if key|length == 1 -%}
-    '{{ key | replace("\0", "\\0") | replace("\f","\\f") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") | replace("\v","\\v") }}'
+    '{{ key | replace("\\", "\\\\") | replace("\n","\\n") | replace("\r","\\r") | replace("\t","\\t") }}'
   {%- else -%}
     {{ key }}
   {%- endif -%}
