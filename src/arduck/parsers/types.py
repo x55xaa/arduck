@@ -16,6 +16,7 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from argparse import ArgumentTypeError
 from typing import Literal
 
 from jinja2 import TemplateNotFound
@@ -49,7 +50,7 @@ def delay(argument: str) -> int:
 
 
     if (ms := int(argument)) <= 0:
-        raise ValueError('delay must be greater than 0')
+        raise ArgumentTypeError('delay must be greater than 0')
 
     return ms
 
@@ -69,7 +70,7 @@ def keyboard_layout(argument: str) -> str:
     try:
         _constant = LAYOUTS[argument]
     except KeyError as e:
-        raise ValueError from e
+        raise ArgumentTypeError from e
 
     return argument
 
@@ -80,7 +81,7 @@ def template(argument: str) -> str:
     try:
      _template = template_.get(argument)
     except TemplateNotFound as e:
-        raise ValueError from e
+        raise ArgumentTypeError from e
 
     return argument
 
@@ -106,6 +107,6 @@ def words_per_minute(argument: str) -> int:
     """The speed at which keystrokes are sent, in words per minute."""
 
     if (wpm := int(argument)) < 0:
-        raise ValueError('wpm must be a positive number')
+        raise ArgumentTypeError('wpm must be a positive number')
 
     return wpm
