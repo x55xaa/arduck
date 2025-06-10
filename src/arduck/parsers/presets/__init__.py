@@ -1,4 +1,4 @@
-""""""
+"""Contains argument parsers for payload presets."""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -16,15 +16,16 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from typing import override
+
 from ...modules.parsing.parsers import MainArgumentParserTemplate
 
 
 class PresetArgumentParser(MainArgumentParserTemplate):
-    """"""
+    """Base ArgumentParser template for payload presets."""
 
+    @override
     def __init__(self, *args, **kwargs):
-        """"""
-
         if 'prog' in kwargs:
             kwargs['prog'] = f'{kwargs['prog']}-preset'
 

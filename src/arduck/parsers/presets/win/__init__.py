@@ -1,11 +1,4 @@
-"""Contains all the argument parsers used by this package.
-
-Each module should contain a `_construct()` function that returns an
-instance of the module's argument parser. This function will be used as the `:func:`
-argument for the `argparse` directive in the docs.
-
-See https://sphinx-argparse.readthedocs.io/en/stable for more information.
-"""
+"""Contains argument parsers for payload presets that only work on Windows."""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -23,8 +16,7 @@ See https://sphinx-argparse.readthedocs.io/en/stable for more information.
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from .main import MainArgumentParser
-from .presets.win import ScLogonArgumentParser
+from .sclogon import ScLogonArgumentParser
 
 
-__all__ = ['MainArgumentParser', 'ScLogonArgumentParser']
+__all__ = ['ScLogonArgumentParser']
