@@ -26,7 +26,7 @@ from random import choices, randint
 from string import ascii_letters, digits
 from typing import Optional, override
 
-from . import PresetArgumentParser, types
+from arduck.parsers.presets import PresetArgumentParser, types
 
 logger = logging.getLogger(__name__)
 
@@ -42,13 +42,13 @@ def _construct() -> ArgumentParser:
 
 
 class ScLogonArgumentParser(PresetArgumentParser):
-    """"""
+    """ArgumentParser for the `sclogon` preset."""
 
     @override
     def __init__(self):
         super().__init__(
             prog='sclogon',
-            description='schedule task to run on logon with Task Scheduler.',
+            description='schedule task to run on logon with Task Scheduler',
             prefix_chars='-',
         )
 

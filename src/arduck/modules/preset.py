@@ -30,7 +30,7 @@ PRESETS_DIRECTORY: Path = Path(
 
 
 class Preset(Protocol):
-    """"""
+    """A sample preset."""
 
     def apply(self, raw_keystrokes: list[str]) -> list[str]: ...
 

@@ -1,4 +1,4 @@
-""""""
+"""Preset that opens the run dialog box."""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -20,6 +20,6 @@ from ...tokenizer import RawKeystroke
 
 
 def apply(raw_keystrokes: list[list[RawKeystroke]]) -> list[list[RawKeystroke]]:
-    """"""
+    """Applies the preset to the given list of keystrokes."""
 
     return [[('KEY_LEFT_GUI', 'r')], [500]] + raw_keystrokes

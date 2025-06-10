@@ -1,4 +1,4 @@
-"""Contains argument types."""
+"""Contains argument types used by preset argument parsers."""
 
 # Copyright (C) 2025  Stefano Cuizza
 

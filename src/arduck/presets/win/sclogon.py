@@ -1,4 +1,4 @@
-""""""
+"""Preset that schedules a program to run at logon."""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -26,7 +26,7 @@ PARSER: ArgumentParser = ScLogonArgumentParser()
 
 
 def apply(raw_keystrokes: list[list[RawKeystroke]]) -> list[list[RawKeystroke]]:
-    """"""
+    """Applies the preset to the given list of keystrokes."""
 
     parser = ScLogonArgumentParser()
 

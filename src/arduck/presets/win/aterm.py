@@ -1,4 +1,7 @@
-""""""
+"""Preset that opens an admin terminal window.
+
+This preset tries to accept the UAC prompt that usually pops up when running programs that required Admin privileges.
+"""
 
 # Copyright (C) 2025  Stefano Cuizza
 
@@ -20,6 +23,6 @@ from ...tokenizer import RawKeystroke
 
 
 def apply(raw_keystrokes: list[list[RawKeystroke]]) -> list[list[RawKeystroke]]:
-    """"""
+    """Applies the preset to the given list of keystrokes."""
 
     return [['KEY_LEFT_GUI', 'x'], [500], 'a', [500], 'KEY_LEFT_ARROW', [300], '\n', [2000]] + raw_keystrokes
