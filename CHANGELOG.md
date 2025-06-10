@@ -3,6 +3,13 @@
 
 
 
+## [0.0.6](https://github.com/x55xaa/arduck/compare/v0.0.5...v0.0.6) - 2025-06-10
+
+### Changed
+
+- Make argument type errors more descriptive ([79a7792](https://github.com/x55xaa/arduck/commit/79a7792286332686df8fc269b18480db81a79eca)) - (Stefano Cuizza)
+
+
 ## [0.0.5](https://github.com/x55xaa/arduck/compare/v0.0.3...v0.0.5) - 2025-05-27
 
 ### Added
@@ -11,6 +18,7 @@
 - Add Windows ALT codes template ([6161a45](https://github.com/x55xaa/arduck/commit/6161a452fb6f58fd70318583581599e46d623020)) - (Stefano Cuizza)
 - Add Windows run dialog template ([e26927d](https://github.com/x55xaa/arduck/commit/e26927d89244138ab146274f5e0518eb2fb1da52)) - (Stefano Cuizza)
 - Add Windows x-menu admin terminal template ([3f0968b](https://github.com/x55xaa/arduck/commit/3f0968bdcb8649a573c1bd13d954c9931f2bdf07)) - (Stefano Cuizza)
+- Add presets ([aa46be3](https://github.com/x55xaa/arduck/commit/aa46be3f70b1ad2389e5703c268e77bed7ebf482)) - (Stefano Cuizza)
 
 ### Changed
 
@@ -22,6 +30,7 @@
 - Better template type check ([4d6690f](https://github.com/x55xaa/arduck/commit/4d6690fed53a1aa6f1db696ad9a929b71ee2f70f)) - (Stefano Cuizza)
 - Add ability to select `init` templates ([b882147](https://github.com/x55xaa/arduck/commit/b882147eeff57732d506f1a8b5ad0379991e494b)) - (Stefano Cuizza)
 - Add break in switch case to avoid accumulating delays ([d06f0d4](https://github.com/x55xaa/arduck/commit/d06f0d4805ce06af2b8c1fbc0513dca5f90d208e)) - (Stefano Cuizza)
+- Handle backslash correctly ([f2323eb](https://github.com/x55xaa/arduck/commit/f2323eb61b3ea8c318a6b1d816df0908ffdef963)) - (Stefano Cuizza)
 
 
 ## [0.0.3](https://github.com/x55xaa/arduck/compare/v0.0.1...v0.0.3) - 2025-05-20
