@@ -66,10 +66,35 @@ $ duck "<LEFT_GUI+r>" 700 "notepad.exe\n" 500 "hello\n" "world!\n"
 ```
 
 
-### More Features
+### Presets...
 
-Check out the official documentation for a more comprehensive list of features.
+Tired of writing the same payload over and over again just with minor adjustments? Not anymore!
+Presets take care of the repetitive aspects of writing a payload.
 
+Let's illustrate their usefulness with an example: you need to write a payload for a Windows machine that opens up the run dialog box and executes a command.
+Instead of manually adding `<LEFT_GUI+r>` to the beginning of your payload, just use the `win/run` preset!
+
+More complex presets can even have a custom argument parser (e.g. `win/sclogon`):
+
+```bash
+$ duck -p win/sclogon -- calc.exe -d "this task gets triggered at logon"
+```
+
+Note the use of the double dash `--` to separate the preset arguments.
+
+
+### ...and Templates!
+
+While presets can only affect keystrokes, templates can change the structure of the payload.
+
+For example, the `win/alt` template makes it so that every keystroke that the user provides is inserted as a Windows ALT code ([cp1252](https://en.wikipedia.org/wiki/Windows-1252)).
+This can come in handy when injecting a Windows machine with an unknown keyboard layout, since ALT codes _should be_ universal (emphasis on the should).
+
+Presets and templates can be used together. The following example demonstrates how to create a payload that opens up the run dialog box on Windows and executes `calc.exe` while using ALT codes:
+
+```bash
+$ duck -p win/run -t win/alt "calc.exe\n"
+```
 
 ## A Word of Caution
 
