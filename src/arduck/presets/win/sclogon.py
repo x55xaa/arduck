@@ -71,5 +71,3 @@ def apply(raw_keystrokes: list[list[RawKeystroke]]) -> list[list[RawKeystroke]]:
         # ['KEY_TAB', ('KEY_LEFT_ALT', 'a'), 'r'],
         [500], [('KEY_LEFT_ALT', 'f'), 'x'],
     ]
-
-
