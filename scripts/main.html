@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>duck &mdash; arduck 0.0.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1fd71caa"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="arduck" href="../_autosummary/arduck.html" />
+    <link rel="prev" title="Basic Usage" href="../usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            arduck
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Basic Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">duck</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/arduck.html">arduck</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Urls</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/x55xaa/arduck">Github</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">arduck</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">duck</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/scripts/main.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="duck">
+<h1>duck<a class="headerlink" href="#duck" title="Link to this heading"></a></h1>
+<p><p>Easy-to-use keystroke injection payload generator for the Arduino.</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">arduck</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="p">{</span><span class="n">dk</span><span class="p">,</span><span class="n">de</span><span class="p">,</span><span class="n">us</span><span class="p">,</span><span class="n">es</span><span class="p">,</span><span class="n">fr</span><span class="p">,</span><span class="n">hu</span><span class="p">,</span><span class="n">it</span><span class="p">,</span><span class="n">pt</span><span class="p">,</span><span class="n">se</span><span class="p">}]</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="p">{</span><span class="n">win</span><span class="o">/</span><span class="n">aterm</span><span class="p">,</span><span class="n">win</span><span class="o">/</span><span class="n">sclogon</span><span class="p">,</span><span class="n">win</span><span class="o">/</span><span class="n">run</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="p">{</span><span class="nb">any</span><span class="p">,</span><span class="n">win</span><span class="o">/</span><span class="n">alt</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">WPM</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="p">[</span><span class="n">ms</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">path</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">V</span><span class="p">]</span>
+              <span class="n">string</span> <span class="o">|</span> <span class="n">delay</span> <span class="p">[</span><span class="n">string</span> <span class="o">|</span> <span class="n">delay</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="arduck.parsers.main-_construct-positional-arguments">
+<h2>Positional Arguments<a class="headerlink" href="#arduck.parsers.main-_construct-positional-arguments" title="Link to this heading"></a></h2>
+<dl class="option-list">
+<dt><kbd>string | delay</kbd></dt>
+<dd><p>sequence of keystrokes with optional delays between them</p>
+</dd>
+</dl>
+</section>
+<section id="arduck.parsers.main-_construct-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#arduck.parsers.main-_construct-named-arguments" title="Link to this heading"></a></h2>
+<dl class="option-list">
+<dt><kbd>-q, --quiet</kbd></dt>
+<dd><p>give less output. option is additive, and can be used up to 3 times (warning/error/critical)</p>
+</dd>
+<dt><kbd>-v, --verbose</kbd></dt>
+<dd><p>set the verbosity level. option is additive, and can be used up to 5 times (debug/info/warning/error/critical). (default: info)</p>
+</dd>
+<dt><kbd>-l, --layout</kbd></dt>
+<dd><p>Possible choices: dk, de, us, es, fr, hu, it, pt, se</p>
+<p>keyboard layout (default: us)</p>
+</dd>
+<dt><kbd>-p, --preset</kbd></dt>
+<dd><p>Possible choices: win/aterm, win/sclogon, win/run</p>
+<p>the preset to use</p>
+</dd>
+<dt><kbd>-t, --template</kbd></dt>
+<dd><p>Possible choices: any, win/alt</p>
+<p>the sketch template to use to generate the payload (default: any)</p>
+</dd>
+<dt><kbd>-w, --wpm</kbd></dt>
+<dd><p>the average speed at which characters are typed, in words per minute. A value of zero will add no delay between keystrokes (default: 180)</p>
+</dd>
+<dt><kbd>-r, --repeat</kbd></dt>
+<dd><p>repeat the injection in a loop. Optionally specify a delay between repetitions in milliseconds</p>
+</dd>
+<dt><kbd>-o, --outfile</kbd></dt>
+<dd><p>the output file (default: sketch.ino)</p>
+</dd>
+<dt><kbd>-V, --version</kbd></dt>
+<dd><p>show program’s version number and exit</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../usage.html" class="btn btn-neutral float-left" title="Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../_autosummary/arduck.html" class="btn btn-neutral float-right" title="arduck" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 Stefano Cuizza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
