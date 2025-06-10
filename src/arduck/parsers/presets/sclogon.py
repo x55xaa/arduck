@@ -26,7 +26,7 @@ from random import choices, randint
 from string import ascii_letters, digits
 from typing import Optional, override
 
-from . import PresetArgumentParser
+from . import PresetArgumentParser, types
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +67,7 @@ class ScLogonArgumentParser(PresetArgumentParser):
             action='store',
             default=default_task_name,
             help='task name',
-            type=str,
+            type=types.sc_task_name,
         )
 
         self.add_argument(
