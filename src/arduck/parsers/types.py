@@ -31,11 +31,9 @@ def key(argument: str) -> list[RawKeystroke]:
     """A series of keystrokes."""
 
     special_characters_mapping: dict[str, str] = {
-        '\\t': '\t',
         '\\n': '\n',
         '\\r': '\r',
-        '\\f': '\f',
-        '\\v': '\v'
+        '\\t': '\t',
     }
 
     # fix misinterpreted special characters.
